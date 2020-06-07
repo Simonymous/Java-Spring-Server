@@ -18,14 +18,14 @@ public class UserAuthenticator {
         parseJsonData();
     }
 
-    public Boolean authenticateUser(String name, String password) {
-        AtomicReference<Boolean> flag = new AtomicReference<>(false);
+    public UserModel authenticateUser(String name, String password) {
+        AtomicReference<UserModel> user = new AtomicReference<>();
         userList.forEach(u -> {
             if (u.name.equals(name)&&u.password.equals(password)) {
-                flag.set(true);
+                user.set(u);
             }
         });
-        return flag.get();
+        return user.get();
     }
 
     private static void parseUserObject(JSONObject jsonUser) {
