@@ -9,18 +9,15 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 public class TokenHelper {
 
     public TokenHelper() {
-
     }
 
     public String generateToken() {
         try {
             Algorithm algorithm = Algorithm.HMAC256("secret");
-            String token = JWT.create()
-                    .withIssuer("auth0")
-                    .sign(algorithm);
+            String token = JWT.create().withIssuer("auth0").sign(algorithm);
             return token;
-        } catch (JWTCreationException exception){
-            //Invalid Signing configuration / Couldn't convert Claims.
+        } catch (JWTCreationException exception) {
+            // Invalid Signing configuration / Couldn't convert Claims.
             return "";
         }
     }
@@ -29,9 +26,9 @@ public class TokenHelper {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getToken();
-        } catch (JWTDecodeException exception){
+        } catch (JWTDecodeException exception) {
             return "";
-            //Invalid token
+            // Invalid token
         }
     }
 }

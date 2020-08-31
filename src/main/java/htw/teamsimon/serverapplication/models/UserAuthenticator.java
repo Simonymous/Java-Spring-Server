@@ -1,17 +1,16 @@
 package htw.teamsimon.serverapplication.models;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.springframework.util.ResourceUtils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class UserAuthenticator {
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.util.ResourceUtils;
 
+public class UserAuthenticator {
     static ArrayList<UserModel> userList = new ArrayList<>();
 
     public UserAuthenticator() {
@@ -21,28 +20,25 @@ public class UserAuthenticator {
     public UserModel authenticateUser(String name, String password) {
         AtomicReference<UserModel> user = new AtomicReference<>();
         userList.forEach(u -> {
-            if (u.name.equals(name)&&u.password.equals(password)) {
+            if (u.name.equals(name) && u.password.equals(password)) {
                 user.set(u);
             }
         });
+
         return user.get();
     }
 
     private static void parseUserObject(JSONObject jsonUser) {
         JSONObject userObject = (JSONObject) jsonUser.get("user");
-        String id = (String) userObject.get("id");
         String name = (String) userObject.get("name");
         String password = (String) userObject.get("password");
 
-        UserModel user = new UserModel();
-        user.setId(id);
-        user.setName(name);
-        user.setPassword(password);
+        UserModel user = new UserModel(name, password);
         userList.add(user);
     }
 
     public ArrayList<UserModel> getUsers() {
-       return userList;
+        return userList;
     }
 
     private static void parseJsonData() {
@@ -54,15 +50,10 @@ public class UserAuthenticator {
 
             JSONArray usersJson = (JSONArray) obj;
 
-            usersJson.forEach( u -> parseUserObject((JSONObject) u));
+            usersJson.forEach(u -> parseUserObject((JSONObject) u));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-       parseJsonData();
-       System.out.println("Reading Users: "+userList);
-    }
-
 }

@@ -1,5 +1,8 @@
 package htw.teamsimon.serverapplication;
 
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,30 +10,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import htw.teamsimon.serverapplication.models.AuthenticatedUserList;
 import htw.teamsimon.serverapplication.models.UserAuthenticator;
 import htw.teamsimon.serverapplication.models.UserModel;
 
 @RestController
-public class AuthenticationController {
+public class RegisterController {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String handleMissingParameter(MissingServletRequestParameterException exception) {
         return exception.getMessage();
     }
 
-    @GetMapping("/authenticate")
+    @GetMapping("/register")
     @ResponseBody
-    public String getToken(@RequestParam(name = "name") String name, @RequestParam String password) {
+    public String getAccount(@RequestParam(name = "name") String name, @RequestParam String password) {
         UserAuthenticator userAuthenticator = new UserAuthenticator();
-        UserModel user = userAuthenticator.authenticateUser(name, password);
-        if (user != null) {
-            TokenHelper tokenHelper = new TokenHelper();
-            String token = tokenHelper.generateToken();
-            AuthenticatedUserList authenticatedUserList = AuthenticatedUserList.getInstance();
-            authenticatedUserList.addUser(token, user);
-            return String.format("User: %s authenticated. Key: %s", user, token);
+        ArrayList<UserModel> userList = userAuthenticator.getUsers();
+
+        AtomicBoolean userExists = new AtomicBoolean(false);
+
+        userList.forEach(u -> {
+            if (u.getName().equals(name)) {
+                userExists.set(true);
+            }
+        });
+
+        if (userExists.get() == false) {
+            RegisterHelper registerHelper = new RegisterHelper();
+            return registerHelper.registerUser(name, password);
         } else
-            return "Invalid Credentials";
+            return "Username already exists";
     }
 }

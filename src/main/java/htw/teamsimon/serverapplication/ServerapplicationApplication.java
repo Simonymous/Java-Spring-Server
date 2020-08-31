@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+// mvn spring-boot:run
 @SpringBootApplication
 public class ServerapplicationApplication {
 
@@ -19,15 +20,11 @@ public class ServerapplicationApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 
-
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			for (String beanName : beanNames) {
 				System.out.println(beanName);
 			}
-
 		};
 	}
-
-
 }

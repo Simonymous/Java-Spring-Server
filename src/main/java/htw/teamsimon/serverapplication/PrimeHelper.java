@@ -1,8 +1,8 @@
 package htw.teamsimon.serverapplication;
 
 public class PrimeHelper {
-    public PrimeHelper() {
 
+    public PrimeHelper() {
     }
 
     public boolean isPrime(int number) {

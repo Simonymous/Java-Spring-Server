@@ -1,12 +1,12 @@
 package htw.teamsimon.serverapplication.models;
 
 public class UserModel {
-    String id;
     String name;
     String password;
 
-    public void setId(String id) {
-        this.id = id;
+    public UserModel(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
     public void setName(String name) {
@@ -15,10 +15,6 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {
@@ -31,10 +27,6 @@ public class UserModel {
 
     @Override
     public String toString() {
-        return "UserModel{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return String.format("UserModel{name='%s', password='%s'}", name, password);
     }
 }
