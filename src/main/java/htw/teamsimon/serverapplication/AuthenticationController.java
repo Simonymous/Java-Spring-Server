@@ -29,7 +29,7 @@ public class AuthenticationController {
             String token = tokenHelper.generateToken();
             AuthenticatedUserList authenticatedUserList = AuthenticatedUserList.getInstance();
             authenticatedUserList.addUser(token, user);
-            return String.format("User: %s authenticated. Key: %s", user, token);
+            return String.format("User: %s authenticated. Token: %s", user, token);
         } else
             return "Invalid Credentials";
     }

@@ -33,9 +33,7 @@ public class PrimeController {
             }
 
             PrimeHelper primeHelper = new PrimeHelper();
-            boolean isPrime = primeHelper.isPrime(number);
-
-            return String.format("Number %s tested %s to being prime", number, Boolean.toString(isPrime));
+            return primeHelper.isPrime(number);
         }
 
         return "Invalid Token";

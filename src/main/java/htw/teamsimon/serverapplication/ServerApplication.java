@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 
 // mvn spring-boot:run
 @SpringBootApplication
-public class ServerapplicationApplication {
+public class ServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServerapplicationApplication.class, args);
+		SpringApplication.run(ServerApplication.class, args);
 	}
 
 	@Bean

@@ -9,9 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.util.ResourceUtils;
 
-public class RegisterHelper {
+public class RegistrationHelper {
 
-    public RegisterHelper() {
+    public RegistrationHelper() {
     }
 
     public String registerUser(String name, String password) {

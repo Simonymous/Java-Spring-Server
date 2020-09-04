@@ -14,7 +14,7 @@ import htw.teamsimon.serverapplication.models.UserAuthenticator;
 import htw.teamsimon.serverapplication.models.UserModel;
 
 @RestController
-public class RegisterController {
+public class RegistrationController {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String handleMissingParameter(MissingServletRequestParameterException exception) {
@@ -36,7 +36,7 @@ public class RegisterController {
         });
 
         if (userExists.get() == false) {
-            RegisterHelper registerHelper = new RegisterHelper();
+            RegistrationHelper registerHelper = new RegistrationHelper();
             return registerHelper.registerUser(name, password);
         } else
             return "Username already exists";
