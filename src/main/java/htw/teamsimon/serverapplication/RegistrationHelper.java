@@ -22,9 +22,12 @@ public class RegistrationHelper {
             Object obj = parser.parse(new FileReader(file));
             JSONArray usersJson = (JSONArray) obj;
 
+            JSONObject innerObject = new JSONObject();
+            innerObject.put("name", name);
+            innerObject.put("password", password);
+
             JSONObject userObject = new JSONObject();
-            userObject.put("name", name);
-            userObject.put("password", password);
+            userObject.put("user", innerObject);
 
             usersJson.add(userObject);
 
