@@ -23,7 +23,8 @@ public class RegistrationController {
 
     @GetMapping("/register")
     @ResponseBody
-    public String getAccount(@RequestParam(name = "name") String name, @RequestParam String password) {
+    public String getAccount(@RequestParam(name = "name") String name,
+            @RequestParam(name = "password") String password) {
         UserAuthenticator userAuthenticator = new UserAuthenticator();
         ArrayList<UserModel> userList = userAuthenticator.getUsers();
 
@@ -37,6 +38,7 @@ public class RegistrationController {
 
         if (userExists.get() == false) {
             RegistrationHelper registerHelper = new RegistrationHelper();
+
             return registerHelper.registerUser(name, password);
         } else
             return "Username already exists";

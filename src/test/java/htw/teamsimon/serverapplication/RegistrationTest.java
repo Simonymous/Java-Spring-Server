@@ -32,6 +32,8 @@ public class RegistrationTest {
 
     @BeforeClass
     public static void setUpUsername() {
+        // generate random username so users.json doesn't have to be cleared everytime a
+        // new test starts
         Random random = new Random();
         testUsername = String.format("test%s", random.nextInt());
     }
@@ -39,7 +41,6 @@ public class RegistrationTest {
     @Test
     @Order(1)
     public void registrationSuccessTest() throws URISyntaxException {
-
         String request = String.format("/register?name=%s&password=test", testUsername);
         String result = String.format("Registration of user %s successfull", testUsername);
 

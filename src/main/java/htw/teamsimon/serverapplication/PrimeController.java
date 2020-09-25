@@ -27,6 +27,7 @@ public class PrimeController {
     @ResponseBody
     public String getPrime(@RequestParam(name = "number") int number, @RequestParam(name = "token") String token) {
         AuthenticatedUserList authenticatedUserList = AuthenticatedUserList.getInstance();
+
         if (authenticatedUserList.getUser(token) != null) {
             if (number <= 0) {
                 return "Number must be bigger than zero";

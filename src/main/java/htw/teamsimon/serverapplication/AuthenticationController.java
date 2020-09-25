@@ -21,14 +21,17 @@ public class AuthenticationController {
 
     @GetMapping("/authenticate")
     @ResponseBody
-    public String getToken(@RequestParam(name = "name") String name, @RequestParam String password) {
+    public String getToken(@RequestParam(name = "name") String name, @RequestParam(name = "password") String password) {
         UserAuthenticator userAuthenticator = new UserAuthenticator();
         UserModel user = userAuthenticator.authenticateUser(name, password);
+
         if (user != null) {
             TokenHelper tokenHelper = new TokenHelper();
             String token = tokenHelper.generateToken();
+
             AuthenticatedUserList authenticatedUserList = AuthenticatedUserList.getInstance();
             authenticatedUserList.addUser(token, user);
+
             return String.format("User: %s authenticated. Token: %s", user, token);
         } else
             return "Invalid Credentials";

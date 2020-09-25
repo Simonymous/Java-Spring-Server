@@ -9,18 +9,19 @@ public class AuthenticatedUserList {
     private AuthenticatedUserList() {
     }
 
-    public void addUser(String key, UserModel user) {
-        authenticatedUserList.put(key, user);
+    public void addUser(String token, UserModel user) {
+        authenticatedUserList.put(token, user);
     }
 
-    public UserModel getUser(String key) {
-        return authenticatedUserList.get(key);
+    public UserModel getUser(String token) {
+        return authenticatedUserList.get(token);
     }
 
     public static AuthenticatedUserList getInstance() {
         if (AuthenticatedUserList.instance == null) {
             AuthenticatedUserList.instance = new AuthenticatedUserList();
         }
+
         return AuthenticatedUserList.instance;
     }
 }

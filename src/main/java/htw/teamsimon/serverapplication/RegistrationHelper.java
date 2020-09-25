@@ -18,7 +18,6 @@ public class RegistrationHelper {
         JSONParser parser = new JSONParser();
         try {
             File file = ResourceUtils.getFile("classpath:users.json");
-
             Object obj = parser.parse(new FileReader(file));
             JSONArray usersJson = (JSONArray) obj;
 
@@ -28,11 +27,9 @@ public class RegistrationHelper {
 
             JSONObject userObject = new JSONObject();
             userObject.put("user", innerObject);
-
             usersJson.add(userObject);
 
             FileWriter fileWriter = new FileWriter(file);
-
             fileWriter.write(usersJson.toJSONString());
             fileWriter.flush();
             fileWriter.close();
